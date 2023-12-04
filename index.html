@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/kihelkonnad_1.js"></script>
+        <script src="data/atlas_4.js"></script>
+        <script src="data/korpus_5.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        map.createPane('pane_ESRIGraydark_0');
+        map.getPane('pane_ESRIGraydark_0').style.zIndex = 400;
+        var layer_ESRIGraydark_0 = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_ESRIGraydark_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_ESRIGraydark_0;
+        map.addLayer(layer_ESRIGraydark_0);
+        function pop_kihelkonnad_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Parish_id'] !== null ? autolinker.link(feature.properties['Parish_id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Ger_name'] !== null ? autolinker.link(feature.properties['Ger_name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Dialect_et'] !== null ? autolinker.link(feature.properties['Dialect_et'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_kihelkonnad_1_0() {
+            return {
+                pane: 'pane_kihelkonnad_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.26666666666666666)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(173,229,228,1.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_kihelkonnad_1');
+        map.getPane('pane_kihelkonnad_1').style.zIndex = 401;
+        map.getPane('pane_kihelkonnad_1').style['mix-blend-mode'] = 'normal';
+        var layer_kihelkonnad_1 = new L.geoJson(json_kihelkonnad_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_kihelkonnad_1',
+            layerName: 'layer_kihelkonnad_1',
+            pane: 'pane_kihelkonnad_1',
+            onEachFeature: pop_kihelkonnad_1,
+            style: style_kihelkonnad_1_0,
+        });
+        bounds_group.addLayer(layer_kihelkonnad_1);
+        map.addLayer(layer_kihelkonnad_1);
+        map.createPane('pane_atlase_tps_2');
+        map.getPane('pane_atlase_tps_2').style.zIndex = 402;
+        var img_atlase_tps_2 = 'data/atlase_tps_2.png';
+        var img_bounds_atlase_tps_2 = [[57.47410236499513,21.6720594473883],[59.840539911263214,28.254638459559075]];
+        var layer_atlase_tps_2 = new L.imageOverlay(img_atlase_tps_2,
+                                              img_bounds_atlase_tps_2,
+                                              {pane: 'pane_atlase_tps_2'});
+        bounds_group.addLayer(layer_atlase_tps_2);
+        map.addLayer(layer_atlase_tps_2);
+        map.createPane('pane_korpuse_tps_3');
+        map.getPane('pane_korpuse_tps_3').style.zIndex = 403;
+        var img_korpuse_tps_3 = 'data/korpuse_tps_3.png';
+        var img_bounds_korpuse_tps_3 = [[57.47410236499513,21.6720594473883],[59.840539911263214,28.254638459559075]];
+        var layer_korpuse_tps_3 = new L.imageOverlay(img_korpuse_tps_3,
+                                              img_bounds_korpuse_tps_3,
+                                              {pane: 'pane_korpuse_tps_3'});
+        bounds_group.addLayer(layer_korpuse_tps_3);
+        map.addLayer(layer_korpuse_tps_3);
+        function pop_atlas_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">SaKhk</th>\
+                        <td>' + (feature.properties['SaKhk'] !== null ? autolinker.link(feature.properties['SaKhk'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SaKyla</th>\
+                        <td>' + (feature.properties['SaKyla'] !== null ? autolinker.link(feature.properties['SaKyla'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Keelend</th>\
+                        <td>' + (feature.properties['Keelend'] !== null ? autolinker.link(feature.properties['Keelend'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">KeelendBin</th>\
+                        <td>' + (feature.properties['KeelendBin'] !== null ? autolinker.link(feature.properties['KeelendBin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_atlas_4_0(feature) {
+            switch(String(feature.properties['KeelendBin'])) {
+                case 'ei ole':
+                    return {
+                pane: 'pane_atlas_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,0.23137254901960785)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,150,15,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'pole':
+                    return {
+                pane: 'pane_atlas_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,0.23137254901960785)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(36,75,122,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_atlas_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,0.23137254901960785)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,95,205,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_atlas_4');
+        map.getPane('pane_atlas_4').style.zIndex = 404;
+        map.getPane('pane_atlas_4').style['mix-blend-mode'] = 'normal';
+        var layer_atlas_4 = new L.geoJson(json_atlas_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_atlas_4',
+            layerName: 'layer_atlas_4',
+            pane: 'pane_atlas_4',
+            onEachFeature: pop_atlas_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_atlas_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_atlas_4);
+        map.addLayer(layer_atlas_4);
+        function pop_korpus_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Dialect_et</th>\
+                        <td>' + (feature.properties['Dialect_et'] !== null ? autolinker.link(feature.properties['Dialect_et'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">eiole</th>\
+                        <td>' + (feature.properties['eiole'] !== null ? autolinker.link(feature.properties['eiole'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">pole</th>\
+                        <td>' + (feature.properties['pole'] !== null ? autolinker.link(feature.properties['pole'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_korpus_5_0(feature) {
+            if (feature.properties['eiole'] >= 0.000000 && feature.properties['eiole'] <= 0.200000 ) {
+                return {
+                pane: 'pane_korpus_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,0.2784313725490196)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,4,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['eiole'] >= 0.200000 && feature.properties['eiole'] <= 0.400000 ) {
+                return {
+                pane: 'pane_korpus_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,0.2784313725490196)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(80,18,123,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['eiole'] >= 0.400000 && feature.properties['eiole'] <= 0.600000 ) {
+                return {
+                pane: 'pane_korpus_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,0.2784313725490196)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,55,122,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['eiole'] >= 0.600000 && feature.properties['eiole'] <= 0.800000 ) {
+                return {
+                pane: 'pane_korpus_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,0.2784313725490196)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,135,97,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['eiole'] >= 0.800000 && feature.properties['eiole'] <= 1.000000 ) {
+                return {
+                pane: 'pane_korpus_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,0.2784313725490196)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,253,191,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_korpus_5');
+        map.getPane('pane_korpus_5').style.zIndex = 405;
+        map.getPane('pane_korpus_5').style['mix-blend-mode'] = 'normal';
+        var layer_korpus_5 = new L.geoJson(json_korpus_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_korpus_5',
+            layerName: 'layer_korpus_5',
+            pane: 'pane_korpus_5',
+            onEachFeature: pop_korpus_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_korpus_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_korpus_5);
+        map.addLayer(layer_korpus_5);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'korpus<br /><table><tr><td style="text-align: center;"><img src="legend/korpus_5_0020.png" /></td><td>0 - 0,2</td></tr><tr><td style="text-align: center;"><img src="legend/korpus_5_02041.png" /></td><td>0,2 - 0,4</td></tr><tr><td style="text-align: center;"><img src="legend/korpus_5_04062.png" /></td><td>0,4 - 0,6</td></tr><tr><td style="text-align: center;"><img src="legend/korpus_5_06083.png" /></td><td>0,6 - 0,8</td></tr><tr><td style="text-align: center;"><img src="legend/korpus_5_0814.png" /></td><td>0,8 - 1</td></tr></table>': layer_korpus_5,'atlas<br /><table><tr><td style="text-align: center;"><img src="legend/atlas_4_eiole0.png" /></td><td>ei ole</td></tr><tr><td style="text-align: center;"><img src="legend/atlas_4_pole1.png" /></td><td>pole</td></tr><tr><td style="text-align: center;"><img src="legend/atlas_4_2.png" /></td><td></td></tr></table>': layer_atlas_4,"korpuse_tps": layer_korpuse_tps_3,"atlase_tps": layer_atlase_tps_2,'<img src="legend/kihelkonnad_1.png" /> kihelkonnad': layer_kihelkonnad_1,"ESRI Gray (dark)": layer_ESRIGraydark_0,}).addTo(map);
+        setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_kihelkonnad_1,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'Name'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"Dialect_et": "str","KeelendBin": "str","Keelend": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Dialect_et = document.createElement('div');
+            div_Dialect_et.id = "div_Dialect_et";
+            div_Dialect_et.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Dialect_et);
+            sel_Dialect_et = document.createElement('select');
+            sel_Dialect_et.multiple = true;
+            sel_Dialect_et.size = 10;
+            sel_Dialect_et.id = "sel_Dialect_et";
+            var Dialect_et_options_str = "<option value='' unselected></option>";
+            sel_Dialect_et.onchange = function(){filterFunc()};
+            Dialect_et_options_str  += '<option value="Ida">Ida</option>';
+            Dialect_et_options_str  += '<option value="Kesk">Kesk</option>';
+            Dialect_et_options_str  += '<option value="Kirde">Kirde</option>';
+            Dialect_et_options_str  += '<option value="Lääne">Lääne</option>';
+            Dialect_et_options_str  += '<option value="Mulgi">Mulgi</option>';
+            Dialect_et_options_str  += '<option value="Ranna">Ranna</option>';
+            Dialect_et_options_str  += '<option value="Saarte">Saarte</option>';
+            Dialect_et_options_str  += '<option value="Setu">Setu</option>';
+            Dialect_et_options_str  += '<option value="Tartu">Tartu</option>';
+            Dialect_et_options_str  += '<option value="Võru">Võru</option>';
+            sel_Dialect_et.innerHTML = Dialect_et_options_str;
+            div_Dialect_et.appendChild(sel_Dialect_et);
+            var lab_Dialect_et = document.createElement('div');
+            lab_Dialect_et.innerHTML = 'Dialect_et';
+            lab_Dialect_et.className = 'filterlabel';
+            div_Dialect_et.appendChild(lab_Dialect_et);
+            var reset_Dialect_et = document.createElement('div');
+            reset_Dialect_et.innerHTML = 'clear filter';
+            reset_Dialect_et.className = 'filterlabel';
+            reset_Dialect_et.onclick = function() {
+                var options = document.getElementById("sel_Dialect_et").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Dialect_et.appendChild(reset_Dialect_et);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_KeelendBin = document.createElement('div');
+            div_KeelendBin.id = "div_KeelendBin";
+            div_KeelendBin.className= "filterselect";
+            document.getElementById("menu").appendChild(div_KeelendBin);
+            sel_KeelendBin = document.createElement('select');
+            sel_KeelendBin.multiple = true;
+            sel_KeelendBin.size = 2;
+            sel_KeelendBin.id = "sel_KeelendBin";
+            var KeelendBin_options_str = "<option value='' unselected></option>";
+            sel_KeelendBin.onchange = function(){filterFunc()};
+            KeelendBin_options_str  += '<option value="ei ole">ei ole</option>';
+            KeelendBin_options_str  += '<option value="pole">pole</option>';
+            sel_KeelendBin.innerHTML = KeelendBin_options_str;
+            div_KeelendBin.appendChild(sel_KeelendBin);
+            var lab_KeelendBin = document.createElement('div');
+            lab_KeelendBin.innerHTML = 'KeelendBin';
+            lab_KeelendBin.className = 'filterlabel';
+            div_KeelendBin.appendChild(lab_KeelendBin);
+            var reset_KeelendBin = document.createElement('div');
+            reset_KeelendBin.innerHTML = 'clear filter';
+            reset_KeelendBin.className = 'filterlabel';
+            reset_KeelendBin.onclick = function() {
+                var options = document.getElementById("sel_KeelendBin").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_KeelendBin.appendChild(reset_KeelendBin);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Keelend = document.createElement('div');
+            div_Keelend.id = "div_Keelend";
+            div_Keelend.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Keelend);
+            sel_Keelend = document.createElement('select');
+            sel_Keelend.multiple = true;
+            sel_Keelend.size = 10;
+            sel_Keelend.id = "sel_Keelend";
+            var Keelend_options_str = "<option value='' unselected></option>";
+            sel_Keelend.onchange = function(){filterFunc()};
+            Keelend_options_str  += '<option value="-p ole (õle)">-p ole (õle)</option>';
+            Keelend_options_str  += '<option value="-p pole">-p pole</option>';
+            Keelend_options_str  += '<option value="-p põle">-p põle</option>';
+            Keelend_options_str  += '<option value="ei (äi) ole">ei (äi) ole</option>';
+            Keelend_options_str  += '<option value="ei (äi) ole; oleki">ei (äi) ole; oleki</option>';
+            Keelend_options_str  += '<option value="ei (äi, öi) pole">ei (äi, öi) pole</option>';
+            Keelend_options_str  += '<option value="ei olõ&apos; õijõ&apos;">ei olõ&apos; õijõ&apos;</option>';
+            Keelend_options_str  += '<option value="ei oole">ei oole</option>';
+            Keelend_options_str  += '<option value="ei põle">ei põle</option>';
+            Keelend_options_str  += '<option value="ei õle">ei õle</option>';
+            Keelend_options_str  += '<option value="ep ole">ep ole</option>';
+            Keelend_options_str  += '<option value="ole ei (õi)">ole ei (õi)</option>';
+            Keelend_options_str  += '<option value="pole">pole</option>';
+            Keelend_options_str  += '<option value="põle">põle</option>';
+            Keelend_options_str  += '<option value="põle; ei(äi) ole">põle; ei(äi) ole</option>';
+            Keelend_options_str  += '<option value="põle;-p ole (õle)">põle;-p ole (õle)</option>';
+            Keelend_options_str  += '<option value="põlõ">põlõ</option>';
+            Keelend_options_str  += '<option value="pöle">pöle</option>';
+            sel_Keelend.innerHTML = Keelend_options_str;
+            div_Keelend.appendChild(sel_Keelend);
+            var lab_Keelend = document.createElement('div');
+            lab_Keelend.innerHTML = 'Keelend';
+            lab_Keelend.className = 'filterlabel';
+            div_Keelend.appendChild(lab_Keelend);
+            var reset_Keelend = document.createElement('div');
+            reset_Keelend.innerHTML = 'clear filter';
+            reset_Keelend.className = 'filterlabel';
+            reset_Keelend.onclick = function() {
+                var options = document.getElementById("sel_Keelend").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Keelend.appendChild(reset_Keelend);
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        </script>
+    </body>
+</html>
